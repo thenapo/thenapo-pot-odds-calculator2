@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מחשבון Pot Odds מתקדם לפוקר</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-dice"></i> מחשבון Pot Odds מתקדם לפוקר</h1>
+      <p class="subtitle">כלי מקצועי לשחקנים עם ניתוח מעמיק של היד שלך</p>
+    </header>
+
+    <main>
+      <div class="card-input-section">
+        <div class="input-group">
+          <label for="hand">הקלפים שלך:</label>
+          <input type="text" id="hand" placeholder="לדוגמה: Ks Js (מלך ספייד, נסיך ספייד)">
+          <div class="helper-text">הזן 2 קלפים עם רווח ביניהם. <span class="example">דוגמאות: Ac Kd, 2h Th</span></div>
+        </div>
+
+        <div class="input-group">
+          <label for="community">קלפי הקהילה:</label>
+          <input type="text" id="community" placeholder="לדוגמה: 2s 4s 6d עבור הפלופ">
+          <div class="helper-text">הזן 3-5 קלפים עם רווח ביניהם (פלופ, טרן, ריבר).</div>
+        </div>
+
+        <div class="pot-info">
+          <div class="input-group">
+            <label for="pot-size">גודל הקופה (₪):</label>
+            <input type="number" id="pot-size" placeholder="גודל הקופה" min="0">
+          </div>
+          <div class="input-group">
+            <label for="call-size">גובה ההימור לקריאה (₪):</label>
+            <input type="number" id="call-size" placeholder="כמה עולה לך לקרוא" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="analyze-btn" class="primary-btn"><i class="fas fa-calculator"></i> נתח את היד</button>
+        <button id="clear-btn" class="secondary-btn"><i class="fas fa-eraser"></i> נקה</button>
+      </div>
+
+      <div class="results-container hidden" id="results-section">
+        <h2>תוצאות הניתוח</h2>
+        
+        <div class="results-grid">
+          <div class="result-card">
+            <h3>היד הנוכחית</h3>
+            <div id="current-hand-result" class="result-content"></div>
+          </div>
+          
+          <div class="result-card">
+            <h3>אאוטים אפשריים</h3>
+            <div id="outs-result" class="result-content"></div>
+          </div>
+          
+          <div class="result-card pot-odds-card">
+            <h3>יחס קופה</h3>
+            <div id="pot-odds-result" class="result-content"></div>
+          </div>
+          
+          <div class="result-card hand-equity-card">
+            <h3>סיכויי זכייה</h3>
+            <div id="equity-result" class="result-content"></div>
+          </div>
+        </div>
+
+        <div class="recommendations" id="recommendations">
+          <h3><i class="fas fa-lightbulb"></i> המלצה</h3>
+          <div id="recommendation-text"></div>
+        </div>
+      </div>
+
+      <div class="notation-guide">
+        <h3>מקרא מקוצר:</h3>
+        <div class="notation-grid">
+          <div class="notation-item"><span class="rank">A</span> - אס</div>
+          <div class="notation-item"><span class="rank">K</span> - מלך</div>
+          <div class="notation-item"><span class="rank">Q</span> - מלכה</div>
+          <div class="notation-item"><span class="rank">J</span> - נסיך</div>
+          <div class="notation-item"><span class="rank">T</span> - 10</div>
+          <div class="notation-item"><span class="suit">s</span> - ספייד (♠)</div>
+          <div class="notation-item"><span class="suit">h</span> - הארט (♥)</div>
+          <div class="notation-item"><span class="suit">d</span> - דיאמונד (♦)</div>
+          <div class="notation-item"><span class="suit">c</span> - קלאב (♣)</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 לפוקר | נבנה לעזור לחישוב יחס קופה </p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/card-utils.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/poker-analyzer.js') }}"></script>
+</body>
+</html>
